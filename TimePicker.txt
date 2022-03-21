@@ -1,0 +1,80 @@
+Example: TimePicker
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timePicker1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="160dp"
+        android:text="Get Date" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"/>
+</RelativeLayout>
+
+MainActivity.kt
+package com.tutlane.timepickerexample;
+import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+public class MainActivity extends AppCompatActivity {
+    TimePicker picker;
+    Button btnGet;
+    TextView tvw;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tvw=(TextView)findViewById(R.id.textView1);
+        picker=(TimePicker)findViewById(R.id.timePicker1);
+        picker.setIs24HourView(true);
+        btnGet=(Button)findViewById(R.id.button1);
+        btnGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hour, minute;
+                String am_pm;
+                if (Build.VERSION.SDK_INT >= 23 ){
+                    hour = picker.getHour();
+                    minute = picker.getMinute();
+                }
+                else{
+                    hour = picker.getCurrentHour();
+                    minute = picker.getCurrentMinute();
+                }
+                if(hour > 12) {
+                    am_pm = "PM";
+                    hour = hour - 12;
+                }
+                else
+                {
+                    am_pm="AM";
+                }
+                tvw.setText("Selected Date: "+ hour +":"+ minute+" "+am_pm);
+            }
+        });
+    }
+}
+

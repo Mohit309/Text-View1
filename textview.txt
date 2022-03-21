@@ -1,0 +1,127 @@
+Example: TextView & Button
+
+activity_main.xml
+------------------
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="318dp"
+        android:gravity="center"
+        android:text="Welcome to my first application"
+        android:textColor="#f00000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="North"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="West"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="East"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="115dp"
+        android:text="South"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+-------------------------------------------------------------
+
+MainActivity.kt
+----------------
+package com.example.myfirstapp
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+import android.widget.Button
+
+class MainActivity : AppCompatActivity() {
+
+    var north=0
+    var west=0
+    var east=0
+    var south=0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        var tv = findViewById<TextView>(R.id.textView)
+
+        var b1 = findViewById<Button>(R.id.button)
+        b1.setOnClickListener{
+            north++
+            tv.setText("North is clicked $north times")
+        }
+
+        var b2 = findViewById<Button>(R.id.button2)
+        b2.setOnClickListener{
+            west++
+            tv.setText("West is clicked $west times")
+        }
+
+        var b3 = findViewById<Button>(R.id.button3)
+        b3.setOnClickListener{
+            east++
+            tv.setText("East is clicked $east times")
+        }
+
+        var b4 = findViewById<Button>(R.id.button4)
+        b4.setOnClickListener{
+            south++
+            tv.setText("South is clicked $south times")
+        }
+    }
+}
+
+
+
+
+
